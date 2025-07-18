@@ -5,6 +5,7 @@ import TransactionList from './components/TransactionList';
 import DateFilter from './components/DateFilter';
 import { TransactionProvider } from './context/TransactionContext';
 import ChartSummary from './components/ChartSummary'; // ✅ IMPORTED
+import FilterControls from './components/FilterControls';
 
 function App() {
   return (

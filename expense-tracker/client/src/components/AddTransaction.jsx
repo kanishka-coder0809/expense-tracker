@@ -13,10 +13,12 @@ const AddTransaction = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     createTransaction({
       ...form,
-      amount: parseFloat(form.amount),
+      amount: parseFloat(form.amount)
     });
+
     setForm({
       title: '',
       amount: '',
@@ -29,22 +31,25 @@ const AddTransaction = () => {
     <form onSubmit={handleSubmit}>
       <h2>Add Transaction</h2>
 
+      <label>Title:</label>
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Enter title"
         value={form.title}
         onChange={(e) => setForm({ ...form, title: e.target.value })}
         required
       />
 
+      <label>Amount:</label>
       <input
         type="number"
-        placeholder="Amount"
+        placeholder="Enter amount"
         value={form.amount}
         onChange={(e) => setForm({ ...form, amount: e.target.value })}
         required
       />
 
+      <label>Type:</label>
       <select
         value={form.type}
         onChange={(e) => setForm({ ...form, type: e.target.value })}
@@ -53,6 +58,7 @@ const AddTransaction = () => {
         <option value="income">Income</option>
       </select>
 
+      <label>Category:</label>
       <select
         value={form.category}
         onChange={(e) => setForm({ ...form, category: e.target.value })}
@@ -66,7 +72,7 @@ const AddTransaction = () => {
         <option value="Other">Other</option>
       </select>
 
-      <button type="submit">Add</button>
+      <button type="submit">➕ Add Transaction</button>
     </form>
   );
 };

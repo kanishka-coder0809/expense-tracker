@@ -14,6 +14,16 @@ app.use(express.json());
 const transactionRoutes = require('./routes/transactions');
 app.use('/api/transactions', transactionRoutes);
 
+const path = require('path');
+
+// Serve static frontend
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+
 // Test route
 app.get('/', (req, res) => {
   res.send('Backend working');
