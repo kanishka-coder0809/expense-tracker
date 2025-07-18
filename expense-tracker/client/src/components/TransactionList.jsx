@@ -12,8 +12,11 @@ const TransactionList = () => {
       <ul>
         {transactions.map((tx) => (
           <li key={tx._id}>
-            {tx.text || tx.title} - ₹{tx.amount} [{tx.type}]
-            <button onClick={() => removeTransaction(tx._id)}>🗑 Delete</button>
+            <strong>{tx.title}</strong> - ₹{tx.amount} [{tx.type}]
+            {tx.category && <> | Category: {tx.category}</>}
+            <button onClick={() => removeTransaction(tx._id)} style={{ marginLeft: '10px' }}>
+              🗑 Delete
+            </button>
           </li>
         ))}
       </ul>
