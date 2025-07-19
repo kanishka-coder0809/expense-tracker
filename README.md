@@ -30,6 +30,7 @@ Other tools used:
 - Mongoose
 - Cors
 - Nodemon
+- Atlas
 
 ---
 
