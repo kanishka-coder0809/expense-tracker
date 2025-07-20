@@ -1,22 +1,31 @@
-import { useState, useContext } from 'react';
-import { TransactionContext } from '../context/TransactionContext';
+import React, { useContext, useState } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 const DateFilter = () => {
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
   const { fetchTransactions } = useContext(TransactionContext);
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   const handleFilter = () => {
-    fetchTransactions(from, to);
+    fetchTransactions({ from, to });
   };
 
   return (
-    <div style={{ margin: '20px 0' }}>
-      <label>From: </label>
-      <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
-      <label style={{ marginLeft: '10px' }}>To: </label>
-      <input type="date" value={to} onChange={(e) => setTo(e.target.value)} />
-      <button onClick={handleFilter} style={{ marginLeft: '10px' }}>Filter</button>
+    <div style={{ marginBottom: "1rem" }}>
+      <h3>Date Filter</h3>
+      <input
+        type="date"
+        value={from}
+        onChange={(e) => setFrom(e.target.value)}
+        style={{ marginRight: "1rem" }}
+      />
+      <input
+        type="date"
+        value={to}
+        onChange={(e) => setTo(e.target.value)}
+        style={{ marginRight: "1rem" }}
+      />
+      <button onClick={handleFilter}>Apply</button>
     </div>
   );
 };

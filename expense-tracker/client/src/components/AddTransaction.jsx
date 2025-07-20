@@ -1,78 +1,81 @@
-// src/components/AddTransaction.jsx
-import { useState, useContext } from 'react';
-import { TransactionContext } from '../context/TransactionContext';
+import React, { useState, useContext } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 const AddTransaction = () => {
-  const { createTransaction } = useContext(TransactionContext);
-  const [form, setForm] = useState({
-    title: '',
-    amount: '',
-    type: 'expense',
-    category: ''
-  });
+  const { createTransaction, isDarkMode } = useContext(TransactionContext);
+
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [type, setType] = useState("expense");
+  const [category, setCategory] = useState("general");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!title || !amount || !category) return;
 
     createTransaction({
-      ...form,
-      amount: parseFloat(form.amount)
+      title,
+      amount: Number(amount),
+      type,
+      category,
     });
 
-    setForm({
-      title: '',
-      amount: '',
-      type: 'expense',
-      category: ''
-    });
+    setTitle("");
+    setAmount("");
+    setType("expense");
+    setCategory("general");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Transaction</h2>
+    <form
+      onSubmit={handleSubmit}
+      className={`add-transaction-form ${isDarkMode ? "dark" : "light"}`}
+    >
+      <h2>➕ Add Transaction</h2>
 
-      <label>Title:</label>
-      <input
-        type="text"
-        placeholder="Enter title"
-        value={form.title}
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
-        required
-      />
+      <div className="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="e.g. Salary, Grocery"
+          required
+        />
+      </div>
 
-      <label>Amount:</label>
-      <input
-        type="number"
-        placeholder="Enter amount"
-        value={form.amount}
-        onChange={(e) => setForm({ ...form, amount: e.target.value })}
-        required
-      />
+      <div className="form-group">
+        <label>Amount (₹)</label>
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          placeholder="Enter amount"
+          required
+        />
+      </div>
 
-      <label>Type:</label>
-      <select
-        value={form.type}
-        onChange={(e) => setForm({ ...form, type: e.target.value })}
-      >
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-      </select>
+      <div className="form-group">
+        <label>Type</label>
+        <select value={type} onChange={(e) => setType(e.target.value)}>
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+      </div>
 
-      <label>Category:</label>
-      <select
-        value={form.category}
-        onChange={(e) => setForm({ ...form, category: e.target.value })}
-        required
-      >
-        <option value="">Select Category</option>
-        <option value="Food">Food</option>
-        <option value="Travel">Travel</option>
-        <option value="Shopping">Shopping</option>
-        <option value="Bills">Bills</option>
-        <option value="Other">Other</option>
-      </select>
+      <div className="form-group">
+        <label>Category</label>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="general">General</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="shopping">Shopping</option>
+          <option value="utilities">Utilities</option>
+          <option value="salary">Salary</option>
+        </select>
+      </div>
 
-      <button type="submit">➕ Add Transaction</button>
+      <button type="submit" className="submit-btn">Add Transaction</button>
     </form>
   );
 };

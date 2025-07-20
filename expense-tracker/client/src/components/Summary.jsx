@@ -1,26 +1,27 @@
-// client/src/components/Summary.jsx
-import { useContext } from 'react';
-import { TransactionContext } from '../context/TransactionContext';
+import React, { useContext } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 const Summary = () => {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions, loading } = useContext(TransactionContext);
+
+  if (loading) return <p>Loading summary...</p>;
 
   const income = transactions
-    .filter((t) => t.type === 'income')
-    .reduce((acc, t) => acc + t.amount, 0);
+    .filter((tx) => tx.type === "income")
+    .reduce((sum, tx) => sum + tx.amount, 0);
 
   const expense = transactions
-    .filter((t) => t.type === 'expense')
-    .reduce((acc, t) => acc + t.amount, 0);
+    .filter((tx) => tx.type === "expense")
+    .reduce((sum, tx) => sum + tx.amount, 0);
 
   const balance = income - expense;
 
   return (
-    <div className="summary">
+    <div style={{ color: "white" }}>
       <h2>Summary</h2>
-      <p>💼 Balance: ₹{balance}</p>
-      <p>🟩 Income: ₹{income}</p>
-      <p>🟥 Expense: ₹{expense}</p>
+      <p>💰 Income: ₹{income}</p>
+      <p>💸 Expense: ₹{expense}</p>
+      <p>🧾 Balance: ₹{balance}</p>
     </div>
   );
 };

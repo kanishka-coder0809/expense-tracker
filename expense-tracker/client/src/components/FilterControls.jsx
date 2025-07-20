@@ -1,19 +1,19 @@
-import { useContext, useState } from 'react';
-import { TransactionContext } from '../context/TransactionContext';
+import React, { useContext, useState } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 const FilterControls = () => {
   const { fetchTransactions } = useContext(TransactionContext);
-  const [type, setType] = useState('all');
+  const [type, setType] = useState("all");
 
   const handleTypeChange = (e) => {
-    const selected = e.target.value;
-    setType(selected);
-    fetchTransactions(null, null, selected);
+    const selectedType = e.target.value;
+    setType(selectedType);
+    fetchTransactions({ type: selectedType });
   };
 
   return (
-    <div style={{ margin: '20px 0' }}>
-      <label>Filter by Type: </label>
+    <div style={{ marginBottom: "1rem" }}>
+      <h3>Transaction Type</h3>
       <select value={type} onChange={handleTypeChange}>
         <option value="all">All</option>
         <option value="income">Income</option>

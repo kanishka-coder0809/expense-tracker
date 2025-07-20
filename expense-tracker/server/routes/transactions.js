@@ -8,19 +8,26 @@ router.get('/', async (req, res) => {
     const { from, to, type } = req.query;
     let filter = {};
 
+    // ✅ Date filter logic
     if (from && to) {
-      filter.date = { $gte: new Date(from), $lte: new Date(to) };
+      filter.createdAt = {
+        $gte: new Date(from),
+        $lte: new Date(to),
+      };
     }
-    if (type && type !== 'all') {
+
+    // ✅ Type filter
+    if (type && type !== "all") {
       filter.type = type;
     }
 
-    const transactions = await Transaction.find(filter);
+    const transactions = await Transaction.find(filter).sort({ createdAt: -1 });
     res.json(transactions);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 // ✅ Add transaction

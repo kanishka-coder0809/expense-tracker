@@ -7,9 +7,10 @@ export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchTransactions = async () => {
+  const fetchTransactions = async (filters = {}) => {
     try {
-      const res = await getTransactions();
+      const params = new URLSearchParams(filters).toString();
+      const res = await getTransactions(params);
       setTransactions(res.data || []);
     } catch (err) {
       console.error("❌ Error fetching transactions:", err.message);
@@ -37,26 +38,18 @@ export const TransactionProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchTransactions();
+    fetchTransactions(); // Initial load
   }, []);
 
   return (
-    <TransactionContext.Provider value={{ transactions, createTransaction, removeTransaction, loading }}>
+    <TransactionContext.Provider value={{
+      transactions,
+      loading,
+      createTransaction,
+      removeTransaction,
+      fetchTransactions // Expose if you want to call with filters from DateFilter/Controls
+    }}>
       {children}
     </TransactionContext.Provider>
   );
-};
-const fetchTransactions = async (from, to, type = 'all') => {
-  try {
-    let query = '';
-    if (from && to) query += `from=${from}&to=${to}`;
-    if (type && type !== 'all') query += `${query ? '&' : ''}type=${type}`;
-
-    const res = await axios.get(`/api/transactions?${query}`);
-    setTransactions(res.data || []);
-  } catch (err) {
-    console.error("❌ Error fetching transactions:", err.message);
-  } finally {
-    setLoading(false);
-  }
 };
