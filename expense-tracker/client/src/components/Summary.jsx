@@ -1,27 +1,21 @@
-import React, { useContext } from "react";
-import { TransactionContext } from "../context/TransactionContext";
+import React from "react";
+import "./Summary.css";
 
 const Summary = () => {
-  const { transactions, loading } = useContext(TransactionContext);
-
-  if (loading) return <p>Loading summary...</p>;
-
-  const income = transactions
-    .filter((tx) => tx.type === "income")
-    .reduce((sum, tx) => sum + tx.amount, 0);
-
-  const expense = transactions
-    .filter((tx) => tx.type === "expense")
-    .reduce((sum, tx) => sum + tx.amount, 0);
-
-  const balance = income - expense;
-
   return (
-    <div style={{ color: "white" }}>
-      <h2>Summary</h2>
-      <p>💰 Income: ₹{income}</p>
-      <p>💸 Expense: ₹{expense}</p>
-      <p>🧾 Balance: ₹{balance}</p>
+    <div className="summary-cards">
+      <div className="summary-card">
+        <h4>Total Balance</h4>
+        <p>₹12,500</p>
+      </div>
+      <div className="summary-card income">
+        <h4>Income</h4>
+        <p>₹20,000</p>
+      </div>
+      <div className="summary-card expense">
+        <h4>Expense</h4>
+        <p>₹7,500</p>
+      </div>
     </div>
   );
 };

@@ -1,54 +1,34 @@
-import { createContext, useEffect, useState } from 'react';
-import { getTransactions, addTransaction, deleteTransaction } from '../services/TransactionService';
+// src/context/TransactionContext.jsx
+import React, { createContext, useState, useEffect } from "react";
 
 export const TransactionContext = createContext();
 
 export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchTransactions = async (filters = {}) => {
-    try {
-      const params = new URLSearchParams(filters).toString();
-      const res = await getTransactions(params);
-      setTransactions(res.data || []);
-    } catch (err) {
-      console.error("❌ Error fetching transactions:", err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const createTransaction = async (data) => {
-    try {
-      const res = await addTransaction(data);
-      setTransactions(prev => [res.data, ...prev]);
-    } catch (err) {
-      console.error("❌ Error adding transaction:", err.message);
-    }
-  };
-
-  const removeTransaction = async (id) => {
-    try {
-      await deleteTransaction(id);
-      setTransactions(prev => prev.filter(tx => tx._id !== id));
-    } catch (err) {
-      console.error("❌ Failed to delete transaction:", err.message);
-    }
-  };
 
   useEffect(() => {
-    fetchTransactions(); // Initial load
+    const stored = localStorage.getItem("transactions");
+    if (stored) {
+      setTransactions(JSON.parse(stored));
+    }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
+  const addTransaction = (transaction) => {
+    setTransactions((prev) => [...prev, transaction]);
+  };
+
+  const deleteTransaction = (id) => {
+    setTransactions((prev) => prev.filter((t) => t.id !== id));
+  };
+
   return (
-    <TransactionContext.Provider value={{
-      transactions,
-      loading,
-      createTransaction,
-      removeTransaction,
-      fetchTransactions // Expose if you want to call with filters from DateFilter/Controls
-    }}>
+    <TransactionContext.Provider
+      value={{ transactions, addTransaction, deleteTransaction }}
+    >
       {children}
     </TransactionContext.Provider>
   );

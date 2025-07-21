@@ -1,11 +1,29 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TrackerPage from "./pages/TrackerPage";
-import { TransactionProvider } from "./context/TransactionContext"; // ✅ adjust path as needed
+import LoginPage from "./components/LoginPage";
+import { TransactionProvider } from "./context/TransactionContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <TransactionProvider>
-      <TrackerPage />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/tracker"
+            element={
+              <>
+                <Navbar />
+                <div style={{ paddingTop: "60px" }}>
+                  <TrackerPage />
+                </div>
+              </>
+            }
+          />
+        </Routes>
+      </Router>
     </TransactionProvider>
   );
 }

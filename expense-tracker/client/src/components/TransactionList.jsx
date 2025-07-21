@@ -27,7 +27,7 @@ const TransactionList = () => {
             <li
               key={tx._id}
               style={{
-                background: tx.type === "income" ? "#2e7d32" : "#b71c1c",
+                background: tx.type === "income" ? "#ba76caff" : "#904e94ff",
                 color: "#fff",
                 padding: "1rem",
                 borderRadius: "8px",
@@ -58,7 +58,7 @@ const TransactionList = () => {
                   fontSize: "1rem",
                 }}
               >
-                ❌
+                Delete
               </button>
             </li>
           ))}
