@@ -1,0 +1,30 @@
+.home-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.home-content {
+  text-align: center;
+}
+
+.start-btn {
+  padding: 0.8rem 2rem;
+  background-color: #fff;
+  color: #4a00e0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #eee;
+}
