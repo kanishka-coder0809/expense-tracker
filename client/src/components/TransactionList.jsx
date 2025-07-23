@@ -6,59 +6,38 @@ const TransactionList = () => {
 
   if (loading) return <p style={{ color: "#ccc" }}>Loading transactions...</p>;
 
-  console.log("✅ Transactions received:", transactions);
-
   const validTransactions = transactions.filter(
     (tx) =>
-      (typeof tx.title === "string" || typeof tx.text === "string") &&
       typeof tx.amount === "number" &&
-      !isNaN(tx.amount)
+      !isNaN(tx.amount) &&
+      (tx.title || tx.text || tx.source || tx.category)
   );
 
   return (
-    <div style={{ color: "#eee", marginTop: "2rem" }}>
-      <h2 style={{ marginBottom: "1rem" }}>📋 Your Transactions</h2>
+    <div className="card transaction-list">
+      <h3 className="card-title">📋 Your Transactions</h3>
 
       {validTransactions.length === 0 ? (
-        <p style={{ color: "#999" }}>No valid transactions yet.</p>
+        <p className="no-transactions">No valid transactions yet.</p>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul className="transaction-items">
           {validTransactions.map((tx) => (
             <li
               key={tx._id}
-              style={{
-                background: tx.type === "income" ? "#2e7d32" : "#b71c1c",
-                color: "#fff",
-                padding: "1rem",
-                borderRadius: "8px",
-                marginBottom: "0.8rem",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-              }}
+              className={`transaction-item ${tx.type === "income" ? "income" : "expense"}`}
             >
-              <div>
+              <div className="transaction-info">
                 <strong>
-                  {tx.title?.trim() || tx.text?.trim() || "Untitled"}
+                  {tx.title?.trim() ||
+                   tx.text?.trim() ||
+                   tx.source?.trim() ||
+                   tx.category?.trim() ||
+                   "Untitled"}
                 </strong>
-                <div style={{ fontSize: "0.85rem", opacity: 0.85 }}>
-                  ₹{tx.amount}
-                </div>
+                <div className="amount">₹{tx.amount}</div>
               </div>
-              <button
-                onClick={() => removeTransaction(tx._id)}
-                style={{
-                  background: "transparent",
-                  border: "1px solid #fff",
-                  color: "#fff",
-                  padding: "6px 12px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontSize: "1rem",
-                }}
-              >
-                ❌
+              <button className="delete-btn" onClick={() => removeTransaction(tx._id)}>
+                Delete
               </button>
             </li>
           ))}

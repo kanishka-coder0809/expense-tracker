@@ -1,0 +1,80 @@
+/* src/pages/login.css */
+:root {
+  --text: #06080a;
+  --card-bg: #ffffff;
+  --accent: #6cb8f9;
+  --border: #d3e3f4;
+  --expense-color: #b7e1f9;
+  --card-subtle: #f5f9fc;
+  --accent-bg: #e0f0ff;
+  --accent-text: #005b9f;
+  --primary-text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--card-subtle);
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  background-color: var(--card-bg);
+  padding: 3rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.login-title {
+  font-size: 2rem;
+  color: var(--accent-text);
+  margin-bottom: 0.25rem;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: var(--primary-text);
+  margin-bottom: 2rem;
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--accent-bg);
+  font-size: 1rem;
+  color: var(--primary-text);
+  outline: none;
+}
+
+.login-input:focus {
+  border-color: var(--accent);
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: var(--accent-text);
+}

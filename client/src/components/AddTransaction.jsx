@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 
 const AddTransaction = () => {
-  const { createTransaction, isDarkMode } = useContext(TransactionContext);
+  const { createTransaction } = useContext(TransactionContext);
 
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -27,10 +27,7 @@ const AddTransaction = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`add-transaction-form ${isDarkMode ? "dark" : "light"}`}
-    >
+    <form onSubmit={handleSubmit} className="add-transaction-form">
       <h2>➕ Add Transaction</h2>
 
       <div className="form-group">

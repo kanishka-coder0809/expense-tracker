@@ -1,52 +1,46 @@
-import React, { useEffect, useState } from "react";
-import Summary from "../components/Summary";
-import Charts from "../components/Charts";
-import AddTransaction from "../components/AddTransaction";
+import React from "react";
+import Sidebar from "../components/Sidebar";
+import TransactionForm from "../components/TransactionForm";
+import IncomeForm from "../components/IncomeForm";
 import TransactionList from "../components/TransactionList";
+import Summary from "../components/Summary";
+import "../styles/main.css"; // Ensure this path is correct
 
 const TrackerPage = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "light") setIsDarkMode(false);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    document.body.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
-
   return (
-    <div className={`tracker-page ${isDarkMode ? "dark-theme" : "light-theme"}`}>
-      <button className="theme-toggle" onClick={toggleTheme}>
-        {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button>
-
+    <div className="tracker-page">
       <div className="tracker-layout">
-        {/* LEFT PANEL */}
         <div className="left-panel">
-          <h1 className="title">💸 Expense Tracker</h1>
+          <div className="sidebar">
+            <div className="sidebar-title">💼 WalletBuddy</div>
+            <ul className="sidebar-menu">
+              <li onClick={() => document.getElementById("summary").scrollIntoView({ behavior: 'smooth' })}>📊 Summary</li>
+              <li onClick={() => document.getElementById("add-expense").scrollIntoView({ behavior: 'smooth' })}>➕ Add Expense</li>
+              <li onClick={() => document.getElementById("add-income").scrollIntoView({ behavior: 'smooth' })}>💰 Add Income</li>
+              <li onClick={() => document.getElementById("transactions").scrollIntoView({ behavior: 'smooth' })}>📋 Transactions</li>
+            </ul>
+          </div>
+        </div>
 
-          <section className="summary-card">
+        <div className="right-panel">
+
+          <section id="summary" className="card">
             <Summary />
           </section>
 
-          <section className="add-transaction-form">
-            <AddTransaction />
+          <section id="add-income" className="card">
+            <h2>💰 Add Income</h2>
+            <IncomeForm />
           </section>
-        </div>
 
-        {/* RIGHT PANEL */}
-        <div className="right-panel">
-          <section className="transaction-section">
+          <section id="add-expense" className="card">
+            <h2>➕ Add Expense</h2>
+            <TransactionForm />
+          </section>
+
+          <section id="transactions" className="card">
+            <h2>📋 Expense Transactions</h2>
             <TransactionList />
-          </section>
-
-          <section className="chart-section">
-            <Charts />
           </section>
         </div>
       </div>

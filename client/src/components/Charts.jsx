@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { TransactionContext } from "../context/TransactionContext";
 
-const COLORS = ["#4caf50", "#f44336"]; // income, expense
+const COLORS = ["#d45d2aff", "#d32d2dff"]; // income, expense
 
 const Charts = () => {
   const { transactions } = useContext(TransactionContext);
