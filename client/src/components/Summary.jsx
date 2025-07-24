@@ -1,8 +1,8 @@
+// src/components/Summary.jsx
 import React, { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Summary = () => {
@@ -10,11 +10,11 @@ const Summary = () => {
 
   const income = transactions
     .filter((tx) => tx.type === "income")
-    .reduce((acc, tx) => acc + Number(tx.amount), 0);
+    .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
   const expense = transactions
     .filter((tx) => tx.type === "expense")
-    .reduce((acc, tx) => acc + Number(tx.amount), 0);
+    .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
   const balance = income - expense;
 
@@ -22,7 +22,6 @@ const Summary = () => {
     labels: ["Income", "Expense"],
     datasets: [
       {
-        label: "₹",
         data: [income, expense],
         backgroundColor: ["#9b5de5", "#ff6b6b"],
         borderColor: ["#fff", "#fff"],
@@ -41,7 +40,11 @@ const Summary = () => {
           <p><strong>Balance:</strong> ₹{balance}</p>
         </div>
         <div className="summary-chart">
-          <Pie data={chartData} />
+          {transactions.length === 0 ? (
+            <p>No data to display</p>
+          ) : (
+            <Pie data={chartData} />
+          )}
         </div>
       </div>
     </div>

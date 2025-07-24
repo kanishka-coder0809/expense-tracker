@@ -7,10 +7,7 @@ const TransactionList = () => {
   if (loading) return <p style={{ color: "#ccc" }}>Loading transactions...</p>;
 
   const validTransactions = transactions.filter(
-    (tx) =>
-      typeof tx.amount === "number" &&
-      !isNaN(tx.amount) &&
-      (tx.title || tx.text || tx.source || tx.category)
+    (tx) => typeof tx.amount === "number" && !isNaN(tx.amount)
   );
 
   return (
@@ -23,21 +20,21 @@ const TransactionList = () => {
         <ul className="transaction-items">
           {validTransactions.map((tx) => (
             <li
-              key={tx._id}
+              key={tx.id} // ✅ Changed from tx._id
               className={`transaction-item ${tx.type === "income" ? "income" : "expense"}`}
             >
               <div className="transaction-info">
                 <strong>
                   {tx.title?.trim() ||
-                   tx.text?.trim() ||
-                   tx.source?.trim() ||
-                   tx.category?.trim() ||
-                   "Untitled"}
+                    tx.text?.trim() ||
+                    tx.source?.trim() ||
+                    tx.category?.trim() ||
+                    "Untitled"}
                 </strong>
                 <div className="amount">₹{tx.amount}</div>
               </div>
-              <button className="delete-btn" onClick={() => removeTransaction(tx._id)}>
-                Delete
+              <button className="delete-btn" onClick={() => removeTransaction(tx.id)}> {/* ✅ Changed */}
+                DELETE
               </button>
             </li>
           ))}

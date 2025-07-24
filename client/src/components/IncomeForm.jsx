@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { TransactionContext } from '../context/TransactionContext';
 
 const IncomeForm = () => {
-  const { createTransaction } = useContext(TransactionContext);
+  const { addTransaction } = useContext(TransactionContext);
   const [incomeData, setIncomeData] = useState({
     amount: '',
     source: '',
@@ -21,7 +21,7 @@ const IncomeForm = () => {
       type: 'income', // this distinguishes it from 'expense'
     };
 
-    createTransaction(newIncome);
+    addTransaction(newIncome);
     setIncomeData({ amount: '', source: '', date: '' });
   };
 

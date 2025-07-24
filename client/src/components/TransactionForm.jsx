@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { TransactionContext } from '../context/TransactionContext';
 
 const TransactionForm = () => {
-  const { createTransaction } = useContext(TransactionContext);
+  const { addTransaction } = useContext(TransactionContext);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -33,7 +33,7 @@ const TransactionForm = () => {
       amount: parseFloat(formData.amount),
     };
 
-    await createTransaction(newTransaction);
+    await addTransaction(newTransaction);
 
     // Clear form after submit
     setFormData({

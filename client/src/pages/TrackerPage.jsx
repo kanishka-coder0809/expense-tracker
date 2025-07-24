@@ -4,12 +4,13 @@ import TransactionForm from "../components/TransactionForm";
 import IncomeForm from "../components/IncomeForm";
 import TransactionList from "../components/TransactionList";
 import Summary from "../components/Summary";
-import "../styles/main.css"; // Ensure this path is correct
+import "../styles/main.css";
 
 const TrackerPage = () => {
   return (
     <div className="tracker-page">
       <div className="tracker-layout">
+        {/* Sidebar */}
         <div className="left-panel">
           <div className="sidebar">
             <div className="sidebar-title">💼 WalletBuddy</div>
@@ -22,8 +23,8 @@ const TrackerPage = () => {
           </div>
         </div>
 
+        {/* Right panel sections */}
         <div className="right-panel">
-
           <section id="summary" className="card">
             <Summary />
           </section>

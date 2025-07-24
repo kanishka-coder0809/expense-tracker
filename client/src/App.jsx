@@ -1,7 +1,7 @@
 import React from "react";
 import TrackerPage from "./pages/TrackerPage";
 import { TransactionProvider } from "./context/TransactionContext";
-import './styles/main.css'; // ✅ Ensure your CSS is connected here!
+import './styles/main.css'; // Ensure CSS is correctly linked
 
 function App() {
   return (
