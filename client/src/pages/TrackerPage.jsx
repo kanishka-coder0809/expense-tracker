@@ -15,9 +15,10 @@ const TrackerPage = () => {
           <div className="sidebar">
             <div className="sidebar-title">💼 WalletBuddy</div>
             <ul className="sidebar-menu">
-              <li onClick={() => document.getElementById("summary").scrollIntoView({ behavior: 'smooth' })}>📊 Summary</li>
-              <li onClick={() => document.getElementById("add-expense").scrollIntoView({ behavior: 'smooth' })}>➕ Add Expense</li>
+              <li onClick={() => document.getElementById("summary").scrollIntoView({ behavior: 'smooth' })}>📊 Dashboard</li>
+  
               <li onClick={() => document.getElementById("add-income").scrollIntoView({ behavior: 'smooth' })}>💰 Add Income</li>
+              <li onClick={() => document.getElementById("add-expense").scrollIntoView({ behavior: 'smooth' })}>➕ Add Expense</li>
               <li onClick={() => document.getElementById("transactions").scrollIntoView({ behavior: 'smooth' })}>📋 Transactions</li>
             </ul>
           </div>

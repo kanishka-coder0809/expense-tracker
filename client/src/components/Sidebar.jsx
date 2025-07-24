@@ -8,8 +8,8 @@ const Sidebar = ({ onNavigate, username }) => {
 
       <ul className="sidebar-menu">
         <li onClick={() => onNavigate('dashboard')}>📊 Dashboard</li>
-        <li onClick={() => onNavigate('income')}>💰 Income</li>
         <li onClick={() => onNavigate('expense')}>💸 Expense</li>
+        <li onClick={() => onNavigate('income')}>💰 Income</li>
         <li onClick={() => onNavigate('logout')}>🚪 Logout</li>
       </ul>
     </div>

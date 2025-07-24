@@ -118,13 +118,14 @@ h1, h2, h3, h4, h5, h6, label, .section-title {
 .income-input-fields {
   display: flex;
   gap: 0.8rem;
+  height: 20px;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .income-input-fields input {
   flex: 1;
-  min-width: 120px;
+  width: 120px;
 }
 
 .income-input-container:hover {
@@ -150,7 +151,7 @@ h1, h2, h3, h4, h5, h6, label, .section-title {
 .income-form input,
 .income-form select,
 .income-form textarea {
-  width: 100%;
+  width: 80%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--border);
