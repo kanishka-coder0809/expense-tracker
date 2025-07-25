@@ -1,49 +1,51 @@
 import React, { useState, useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 
-const AddIncome = () => {
+const IncomeInput = () => {
+  const { createTransaction } = useContext(TransactionContext);
+  const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [source, setSource] = useState("");
   const [date, setDate] = useState("");
-  const { addTransaction } = useContext(TransactionContext);
 
-  const handleSubmit = (e) => {
+  const handleAddIncome = (e) => {
     e.preventDefault();
-    if (!amount || !source || !date) return;
+    if (!title || !amount || !date) return alert("Please fill in all fields");
 
-    const newIncome = {
-      id: Date.now(),
+    createTransaction({
+      title,
+      amount: Number(amount),
       type: "income",
-      amount: parseFloat(amount),
-      source,
       date,
-    };
-    addTransaction(newIncome);
+    });
+
+    setTitle("");
     setAmount("");
-    setSource("");
     setDate("");
   };
 
   return (
-    <div className="add-income">
-      <h3>Add Income</h3>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="card income-input">
+      <h3 className="card-title">💰 Add Income</h3>
+      <form onSubmit={handleAddIncome} className="form-group">
         <input
           type="text"
-          placeholder="Income Source"
-          value={source}
-          onChange={(e) => setSource(e.target.value)}
+          placeholder="Income Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <input
           type="number"
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          required
         />
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
+          required
         />
         <button type="submit">Add Income</button>
       </form>
@@ -51,4 +53,4 @@ const AddIncome = () => {
   );
 };
 
-export default AddIncome;
+export default IncomeInput;
