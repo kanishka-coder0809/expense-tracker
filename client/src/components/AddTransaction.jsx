@@ -7,23 +7,34 @@ const AddTransaction = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("expense");
-  const [category, setCategory] = useState("general");
+  const [category, setCategory] = useState("");
+
+  const expenseCategories = [
+    "Food",
+    "Transport",
+    "Shopping",
+    "Utilities",
+    "Entertainment",
+    "Rent",
+    "Other",
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !amount || !category) return;
+    if (!title || !amount || (type === "expense" && !category)) return;
 
     createTransaction({
       title,
       amount: Number(amount),
       type,
-      category,
+      category: type === "expense" ? category.toLowerCase() : "",
     });
 
+    // Reset form
     setTitle("");
     setAmount("");
     setType("expense");
-    setCategory("general");
+    setCategory("");
   };
 
   return (
@@ -54,25 +65,42 @@ const AddTransaction = () => {
 
       <div className="form-group">
         <label>Type</label>
-        <select value={type} onChange={(e) => setType(e.target.value)}>
+        <select
+          value={type}
+          onChange={(e) => {
+            setType(e.target.value);
+            setCategory("");
+          }}
+        >
           <option value="expense">Expense</option>
           <option value="income">Income</option>
         </select>
       </div>
 
-      <div className="form-group">
-        <label>Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="general">General</option>
-          <option value="food">Food</option>
-          <option value="transport">Transport</option>
-          <option value="shopping">Shopping</option>
-          <option value="utilities">Utilities</option>
-          <option value="salary">Salary</option>
-        </select>
-      </div>
+      {/* SHOW category dropdown only for Expense */}
+      {type === "expense" && (
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select Category
+            </option>
+            {expenseCategories.map((cat) => (
+              <option key={cat} value={cat.toLowerCase()}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
-      <button type="submit" className="submit-btn">Add Transaction</button>
+      <button type="submit" className="submit-btn">
+        Add Transaction
+      </button>
     </form>
   );
 };

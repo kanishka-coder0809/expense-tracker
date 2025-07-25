@@ -1,21 +1,28 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-// Create the context
 export const TransactionContext = createContext();
 
-// Backend URL
-const BACKEND_URL = 'http://localhost:5000/api/transactions'; // Update if deploying
+const BACKEND_URL = 'http://localhost:5000/api/transactions';
 
-// Provider component
 export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch all transactions from MongoDB on mount
+  // Get logged-in user from localStorage
+  const getCurrentUser = () => {
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    return user?.email || user?.username || null;
+  };
+
+  const currentUser = getCurrentUser();
+
+  // ✅ Fetch user-specific transactions from MongoDB
   useEffect(() => {
     const fetchTransactions = async () => {
+      if (!currentUser) return;
+
       try {
-        const res = await fetch(BACKEND_URL);
+        const res = await fetch(`${BACKEND_URL}/user/${currentUser}`);
         const data = await res.json();
         setTransactions(data);
         setLoading(false);
@@ -26,7 +33,7 @@ export const TransactionProvider = ({ children }) => {
     };
 
     fetchTransactions();
-  }, []);
+  }, [currentUser]);
 
   // ✅ Add new transaction
   const addTransaction = async (transaction) => {
@@ -34,7 +41,7 @@ export const TransactionProvider = ({ children }) => {
       const res = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(transaction),
+        body: JSON.stringify({ ...transaction, user: currentUser }),
       });
 
       const newTransaction = await res.json();
@@ -60,7 +67,7 @@ export const TransactionProvider = ({ children }) => {
     <TransactionContext.Provider
       value={{
         transactions,
-        setTransactions,        // ✅ <-- Now included
+        setTransactions,
         addTransaction,
         deleteTransaction,
         loading,
