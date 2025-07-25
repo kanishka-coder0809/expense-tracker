@@ -15,10 +15,10 @@ app.use(express.json());
 const transactionRoutes = require('./routes/transactions');
 app.use('/api/transactions', transactionRoutes);
 
-// ✅ Serve frontend in production
+// ✅ Serve frontend in production (React's `build` folder)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
-  
+
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
@@ -32,14 +32,3 @@ mongoose
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch(err => console.error('❌ Mongo Error:', err));
-const path = require("path");
-const express = require("express");
-
-// Serve static files in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  });
-}

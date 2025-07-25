@@ -4,7 +4,8 @@ import React, { createContext, useState, useEffect } from 'react';
 export const TransactionContext = createContext();
 
 // Backend URL
-const BACKEND_URL = 'http://localhost:5000/api/transactions'; // Update if deploying
+const BACKEND_URL = 'https://golden-griffin-backend.onrender.com/api/transactions'; // example
+
 
 // Provider component
 export const TransactionProvider = ({ children }) => {
