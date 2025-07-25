@@ -1,6 +1,11 @@
 {
   "build": {
-    "root": "server"
+    "env": "production",
+    "command": "npm install && npm run heroku-postbuild",
+    "cwd": "server"
   },
-  "start": "npm start"
+  "start": {
+    "command": "npm start",
+    "cwd": "server"
+  }
 }
