@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 
 const TransactionList = () => {
-  const { transactions, loading, removeTransaction } = useContext(TransactionContext);
+  const { transactions, loading, deleteTransaction } = useContext(TransactionContext);
 
   if (loading) return <p style={{ color: "#ccc" }}>Loading transactions...</p>;
 
@@ -20,7 +20,7 @@ const TransactionList = () => {
         <ul className="transaction-items">
           {validTransactions.map((tx) => (
             <li
-              key={tx.id} // ✅ Changed from tx._id
+              key={tx._id}
               className={`transaction-item ${tx.type === "income" ? "income" : "expense"}`}
             >
               <div className="transaction-info">
@@ -33,7 +33,7 @@ const TransactionList = () => {
                 </strong>
                 <div className="amount">₹{tx.amount}</div>
               </div>
-              <button className="delete-btn" onClick={() => removeTransaction(tx.id)}> {/* ✅ Changed */}
+              <button className="delete-btn" onClick={() => deleteTransaction(tx._id)}>
                 DELETE
               </button>
             </li>

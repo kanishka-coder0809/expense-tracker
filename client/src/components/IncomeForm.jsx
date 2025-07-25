@@ -1,8 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { TransactionContext } from '../context/TransactionContext';
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer
+} from 'recharts';
+import './IncomeForm.css';
 
 const IncomeForm = () => {
-  const { addTransaction } = useContext(TransactionContext);
+  const { addTransaction, transactions } = useContext(TransactionContext);
   const [incomeData, setIncomeData] = useState({
     amount: '',
     source: '',
@@ -18,53 +22,86 @@ const IncomeForm = () => {
 
     const newIncome = {
       ...incomeData,
-      type: 'income', // this distinguishes it from 'expense'
+      type: 'income',
     };
 
     addTransaction(newIncome);
     setIncomeData({ amount: '', source: '', date: '' });
   };
 
+  // 📊 Filter and group income by date
+  const dailyIncome = useMemo(() => {
+    const incomeByDate = {};
+    transactions
+      .filter(tx => tx.type === 'income')
+      .forEach(tx => {
+        const date = tx.date;
+        incomeByDate[date] = (incomeByDate[date] || 0) + Number(tx.amount);
+      });
+
+    return Object.entries(incomeByDate).map(([date, amount]) => ({
+      date,
+      amount,
+    }));
+  }, [transactions]);
+
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <div className="form-group">
-        <label className="form-label">Amount</label>
-        <input
-          type="number"
-          name="amount"
-          value={incomeData.amount}
-          onChange={handleChange}
-          className="form-input"
-          required
-        />
-      </div>
+    <div className="income-form-wrapper">
+      <form onSubmit={handleSubmit} className="form income-form">
+        <div className="form-group narrow">
+          <label className="form-label">Amount</label>
+          <input
+            type="number"
+            name="amount"
+            value={incomeData.amount}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </div>
 
-      <div className="form-group">
-        <label className="form-label">Source</label>
-        <input
-          type="text"
-          name="source"
-          value={incomeData.source}
-          onChange={handleChange}
-          className="form-input"
-          required
-        />
-      </div>
+        <div className="form-group narrow">
+          <label className="form-label">Source</label>
+          <input
+            type="text"
+            name="source"
+            value={incomeData.source}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </div>
 
-      <div className="form-group">
-        <label className="form-label">Date</label>
-        <input
-          type="date"
-          name="date"
-          value={incomeData.date}
-          onChange={handleChange}
-          className="form-input"
-          required
-        />
-      </div>
+        <div className="form-group narrow">
+          <label className="form-label">Date</label>
+          <input
+            type="date"
+            name="date"
+            value={incomeData.date}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+        </div>
 
-      <button type="submit" className="form-button">Add Income</button>
-    </form>
+        <button type="submit" className="form-button">Add Income</button>
+      </form>
+
+      {/* 📈 Bar Chart beside form */}
+      <div className="income-chart">
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart
+            data={dailyIncome}
+            margin={{ top: 20, right: 10, left: 10, bottom: 10 }}
+          >
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="amount" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
   );
 };
 

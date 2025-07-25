@@ -1,0 +1,29 @@
+.income-form-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.income-form {
+  flex: 1;
+  min-width: 250px;
+}
+
+.income-chart {
+  flex: 2;
+  min-width: 300px;
+  max-height: 240px;
+  overflow-x: auto;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fefefe;
+}
+
+/* Narrow input fields */
+.form-group.narrow {
+  max-width: 250px;
+}

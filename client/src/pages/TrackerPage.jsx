@@ -1,3 +1,4 @@
+// src/pages/TrackerPage.jsx
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import TransactionForm from "../components/TransactionForm";
@@ -7,6 +8,13 @@ import Summary from "../components/Summary";
 import "../styles/main.css";
 
 const TrackerPage = () => {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="tracker-page">
       <div className="tracker-layout">
@@ -15,11 +23,10 @@ const TrackerPage = () => {
           <div className="sidebar">
             <div className="sidebar-title">💼 WalletBuddy</div>
             <ul className="sidebar-menu">
-              <li onClick={() => document.getElementById("summary").scrollIntoView({ behavior: 'smooth' })}>📊 Dashboard</li>
-  
-              <li onClick={() => document.getElementById("add-income").scrollIntoView({ behavior: 'smooth' })}>💰 Add Income</li>
-              <li onClick={() => document.getElementById("add-expense").scrollIntoView({ behavior: 'smooth' })}>➕ Add Expense</li>
-              <li onClick={() => document.getElementById("transactions").scrollIntoView({ behavior: 'smooth' })}>📋 Transactions</li>
+              <li onClick={() => scrollToSection("summary")}>📊 Dashboard</li>
+              <li onClick={() => scrollToSection("add-income")}>💰 Add Income</li>
+              <li onClick={() => scrollToSection("add-expense")}>➕ Add Expense</li>
+              <li onClick={() => scrollToSection("transactions")}>📋 Transactions</li>
             </ul>
           </div>
         </div>

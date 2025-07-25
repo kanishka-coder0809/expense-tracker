@@ -1,0 +1,129 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #f9f9f9);
+}
+
+.login-left {
+  flex: 1;
+  background: white;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.login-left h1 {
+  font-size: 2.5rem;
+  color: #2149b5;
+  margin-bottom: 0.5rem;
+}
+
+.login-left h2 {
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.login-left p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.login-left form input,
+.login-left form button {
+  width: 100%;
+  padding: 1rem;
+  margin: 0.8rem 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.login-left form input:focus {
+  outline: none;
+  border-color: #6cb8f9;
+  box-shadow: 0 0 5px rgba(108, 184, 249, 0.5);
+}
+
+.login-left form button {
+  background: #2149b5;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.login-left form button:hover {
+  background: #183a9a;
+}
+
+.login-left form p {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.login-left form a {
+  color: #2149b5;
+  text-decoration: none;
+}
+
+.login-left form a:hover {
+  text-decoration: underline;
+}
+
+.login-right {
+  flex: 1;
+  background: #eaf3fb;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wallet-amount {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #2149b5;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.login-right h3 {
+  margin-bottom: 1rem;
+  color: #2149b5;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 80px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+}
