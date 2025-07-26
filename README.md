@@ -9,12 +9,10 @@ This app allows users to add income and expense transactions, view insights thro
 ## 🚀 Features
 
 - ➕ Add new income and expense entries with categories and date
-- 📊 **Income Line Chart**: Track your income growth over time
-- 📉 **Expense Bar Chart**: Visualize your spending by category (e.g., 🥗 Food, 👕 Clothes)
+- 📊 **Income Bar Chart**: Track your income growth over time
 - 📜 View categorized transaction history (expenses only)
 - 🎨 Clean and modern **purple-themed UI**
 - 🧠 Real-time data sharing using Context API
-- 🗂️ Emoji-based sidebar navigation
 - 🌐 Persistent storage with **MongoDB Atlas**
 - ⚡ Built with Vite + React for lightning-fast frontend
 
