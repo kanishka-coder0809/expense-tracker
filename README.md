@@ -1,36 +1,40 @@
- 💸 Expense Tracker (MERN Stack)
+# 💸 WalletBuddy - Expense Tracker (MERN Stack)
 
-A full-stack expense tracker built using MongoDB, Express, React, and Node.js.  
-This app allows users to add income/expense transactions and view their financial summary live.
+A beautifully designed full-stack expense tracker built using **MongoDB**, **Express**, **React**, and **Node.js**.
+
+This app allows users to add income and expense transactions, view insights through graphs, and analyze their spending habits – all in a sleek, purple-themed dashboard.
 
 ---
 
 ## 🚀 Features
 
-- ➕ Add new income and expense transactions
-- 📜 View complete transaction history
-- 📊 Live-updating summary: Balance, Income, Expense
-- 🌐 Connected to MongoDB Atlas for persistent data
-- ⚡ Built with Vite + React for a fast frontend
-- 🔄 Real-time updates using Context API
+- ➕ Add new income and expense entries with categories and date
+- 📊 **Income Line Chart**: Track your income growth over time
+- 📉 **Expense Bar Chart**: Visualize your spending by category (e.g., 🥗 Food, 👕 Clothes)
+- 📜 View categorized transaction history (expenses only)
+- 🎨 Clean and modern **purple-themed UI**
+- 🧠 Real-time data sharing using Context API
+- 🗂️ Emoji-based sidebar navigation
+- 🌐 Persistent storage with **MongoDB Atlas**
+- ⚡ Built with Vite + React for lightning-fast frontend
 
 ---
 
-
 ## 🛠 Tech Stack
 
-| Frontend        | Backend        | Database    |
-|-----------------|----------------|-------------|
+| Frontend        | Backend         | Database      |
+|-----------------|------------------|---------------|
 | React + Vite    | Node.js + Express | MongoDB Atlas |
 
-Other tools used:
+### Additional Tools/Libraries:
+
 - Axios
 - Context API
-- Dotenv
+- Chart.js
 - Mongoose
+- Dotenv
 - Cors
 - Nodemon
-- Atlas
 
 ---
 
