@@ -33,6 +33,11 @@ Other tools used:
 - Atlas
 
 ---
+![login](https://github.com/user-attachments/assets/be73f81f-99ba-4714-b80d-cdab3da9de3a)
+![Dashboard](https://github.com/user-attachments/assets/30ab3b23-0b4f-4df3-8478-f9c9ebb0ecf6)
+![Trasactions](https://github.com/user-attachments/assets/ebdbf7d5-8f37-4bab-abe1-c0db6b1eca9a)
+
+
 
 ## 📦 Installation
 
@@ -48,3 +53,4 @@ npm install
 # 3. Install frontend dependencies
 cd ../client
 npm install
+
